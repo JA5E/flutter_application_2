@@ -13,7 +13,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Login',
-        initialRoute: 'home',
+        initialRoute: 'login',
         routes: {
           'home': (_) => const HomeScreen(),
           'login': (_) => const LoginScreen()
