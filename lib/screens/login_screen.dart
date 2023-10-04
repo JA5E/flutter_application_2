@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/providers/login_form_provider.dart';
+import 'package:flutter_application_2/screens/ui/input_decorations.dart';
 import 'package:flutter_application_2/widgets/auth_background.dart';
 import 'package:flutter_application_2/widgets/card_container.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -53,20 +56,27 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _loginForm() {
-    var column = Container(
-      padding: const EdgeInsets.all(30.0),
+    //flutter pub add provider
+    final loginForm = Provider.of<LoginFormProvider>(context);
+    return Form(
+      key: loginForm.formKey,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TextField(
             controller: _usernameController,
-            decoration: const InputDecoration(
-                icon: Icon(Icons.mail), labelText: 'Aqui pon tu usuario'),
+            decoration: InputDecorations.authInputDecoration(
+                hintText: "Ingresa un nombre propio solamente sin apellidos",
+                labelText: 'Aqui pon tu usuario',
+                prefixIcon: Icons.email),
           ),
           TextField(
             controller: _passwordController,
-            decoration: const InputDecoration(
-                icon: Icon(Icons.lock_open), labelText: 'Aqui pon tu password'),
+            decoration: InputDecorations.authInputDecoration(
+                hintText: "Debe tener letras y numeros",
+                prefixIcon: Icons.lock_open,
+                labelText: 'Aqui pon tu password'),
             obscureText: true,
             keyboardType: TextInputType.visiblePassword,
           ),
@@ -80,7 +90,6 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     );
-    return column;
   }
 
   void onLogin() {
