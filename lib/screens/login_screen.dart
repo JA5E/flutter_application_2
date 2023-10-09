@@ -64,12 +64,13 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextField(
+          TextFormField(
             controller: _usernameController,
             decoration: InputDecorations.authInputDecoration(
                 hintText: "Ingresa un nombre propio solamente sin apellidos",
                 labelText: 'Aqui pon tu usuario',
                 prefixIcon: Icons.email),
+            validator: (value) {},
           ),
           TextField(
             controller: _passwordController,
