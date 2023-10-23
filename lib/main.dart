@@ -1,8 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/screens/products_screen.dart';
 import 'package:flutter_application_2/screens/screens.dart';
+import 'package:flutter_application_2/services/products_service.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(AppState());
+}
+
+class AppState extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ProductsService(),
+          lazy: false,
+        )
+      ],
+      child: const MainApp(),
+    );
+  }
 }
 
 class MainApp extends StatelessWidget {
@@ -13,10 +31,11 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Login',
-        initialRoute: 'login',
+        initialRoute: 'products',
         routes: {
           'home': (_) => const HomeScreen(),
-          'login': (_) => const LoginScreen()
+          'login': (_) => const LoginScreen(),
+          'products': (_) => const ProductsScreen(),
         });
   }
 }
